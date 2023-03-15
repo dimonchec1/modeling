@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  game:
+    image: dimonchec1/2048game:latest
+    container_name: game2048
+    build: 
+      context: .
+    ports:
+      - 8080:8080
+    restart: unless-stopped

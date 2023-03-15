@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  client:
+    image: client
+    container_name:  app-client
+    build: 
+      context: ../client
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+  server:
+    image: server
+    container_name: app-server
+    build: 
+      context: ../server
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+    restart: unless-stopped
+  db:
+    image: postgres:latest
+    container_name: db
+    ports:
+      - "1933:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    restart: unless-stopped
+    
